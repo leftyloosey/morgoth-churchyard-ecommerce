@@ -73,23 +73,27 @@ router.post('/', (req, res) => {
     });
 });
 
-router.post('/try', async (req, res) => {
+router.put('/try/:id', async (req, res) => {
   // Product.create(req.body)
-  console.log(req.body, req.body.price)
+  console.log(req.params.id)
   try {
-    const newProduct = await Product.create({ 
-      product_name: req.body.product_name, 
-      price: req.body.price,
-      stock: req.body.stock,
-      category_id: req.body.category_id
-    })
-  res.status(200).json(newProduct);
+    // const upProduct = await ProductTag.findAll({ where: { product_id: req.params.id } });
+    // res.status(200).json(upProduct);
 
+    const upProduct =  Product.update(req.body, {
+      where: {
+        id: req.params.id,
+      }})
+
+      res.status(200).json(upProduct);
+      
+    // we're goign through the update route line by line still
   } catch (err) {
     res.status(500).json(err);
-
   }
-})
+  
+  }
+)
 // update product
 router.put('/:id', (req, res) => {
   // update product data
@@ -106,7 +110,10 @@ router.put('/:id', (req, res) => {
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
       // create filtered list of new tag_ids
+      console.log("PRODUCT TAGS", productTags)
+      console.log("REQ BODY TAGIDS", req.body.tagIds)
       const newProductTags = req.body.tagIds
+
         .filter((tag_id) => !productTagIds.includes(tag_id))
         .map((tag_id) => {
           return {
@@ -127,11 +134,12 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.json(updatedProductTags))
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
       res.status(400).json(err);
     });
 });
 
+      
 router.delete('/:id', async (req, res) => {
   // delete one product by its `id` value
 
