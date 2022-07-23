@@ -73,27 +73,7 @@ router.post('/', (req, res) => {
     });
 });
 
-router.put('/try/:id', async (req, res) => {
-  // Product.create(req.body)
-  console.log(req.params.id)
-  try {
-    // const upProduct = await ProductTag.findAll({ where: { product_id: req.params.id } });
-    // res.status(200).json(upProduct);
 
-    const upProduct =  Product.update(req.body, {
-      where: {
-        id: req.params.id,
-      }})
-
-      res.status(200).json(upProduct);
-      
-    // we're goign through the update route line by line still
-  } catch (err) {
-    res.status(500).json(err);
-  }
-  
-  }
-)
 // update product
 router.put('/:id', (req, res) => {
   // update product data
