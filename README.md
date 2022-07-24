@@ -12,7 +12,7 @@ routes are tested in insomnia core.
 Data (structured by ORM models for categories, products, and tags) are accessed 
 and modified by GET, POST, PUT, and DELETE requests to an express.js server.
 
-[Video Demonsration](https://www.example.com)
+[Video Demonstration](https://drive.google.com/file/d/1ZQnkkQxyL-nlazGgeYKizzx4wcDCNXn3/view)
 
 ![screenshot](13screen.png)
 
